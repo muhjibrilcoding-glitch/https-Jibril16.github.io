@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comments - Luthfi Halimawan</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 100%);
+            color: #e0e0e0; line-height: 1.6; padding: 20px; min-height: 100vh;
+        }
+        .container { max-width: 1200px; margin: 0 auto; }
+        .header {
+            background: linear-gradient(135deg, #00BFFF 0%, #00BFFF 100%); color: #000;
+            padding: 30px; border-radius: 15px 15px 0 0;
+            box-shadow: 0 10px 30px rgba(0,191,255,.3); text-align: center;
+        }
+        .header h1 { font-size: 2.5em; font-weight: 700; letter-spacing: 1px; }
+        .layout {
+            display: grid; grid-template-columns: 280px 1fr; gap: 30px; background: #1a1a1a;
+            padding: 30px; border-radius: 0 0 15px 15px; box-shadow: 0 15px 40px rgba(0,0,0,.5);
+        }
+        .sidebar {
+            display:flex; flex-direction:column; gap:30px; background:linear-gradient(180deg,#2a2a2a 0%,#1a1a1a 100%);
+            padding:30px 20px; border-radius:15px; border-left:5px solid #00BFFF;
+            box-shadow:0 10px 30px rgba(0,191,255,.15), inset 0 1px 0 rgba(0,191,255,.1);
+            height:fit-content; position:sticky; top:20px;
+        }
+        .sidebar h3 { color:#00BFFF; font-size:1.2em; margin-bottom:15px; text-transform:uppercase; letter-spacing:2px; text-align:center; padding-bottom:15px; border-bottom:2px solid #00BFFF; }
+        .sidebar h3:first-child { margin-top:0; margin-bottom:20px; padding:15px; background:rgba(0,191,255,.05); border-radius:8px; border:1px solid rgba(0,191,255,.2); }
+        .menu-button {
+            display:flex; align-items:center; justify-content:center; padding:14px 15px;
+            background:linear-gradient(135deg,#00BFFF 0%,#00BFFF 100%); color:#000; text-decoration:none;
+            border-radius:10px; font-weight:600; margin-bottom:12px; transition:all .3s ease;
+            text-align:center; border:2px solid #00BFFF; box-shadow:0 4px 12px rgba(0,191,255,.2); font-size:.95em;
+        }
+        .menu-button:hover { transform:translateY(-4px); box-shadow:0 8px 25px rgba(0,191,255,.4); }
+        .menu-button.active { box-shadow:0 8px 25px rgba(0,191,255,.4); }
+        .sidebar img { max-width:100%; height:auto; border-radius:12px; border:3px solid #00BFFF; box-shadow:0 10px 25px rgba(0,191,255,.25); }
+        .content { display:flex; flex-direction:column; gap:20px; }
+        .content h2 { color:#00BFFF; font-size:1.8em; margin:0 0 15px; padding-bottom:10px; border-bottom:3px solid #00BFFF; text-transform:uppercase; }
+        .comment-form, .comments-list { background:#222; border:1px solid rgba(0,191,255,.2); border-radius:15px; padding:25px; box-shadow:0 8px 25px rgba(0,0,0,.25); }
+        label { display:block; color:#00BFFF; font-weight:600; margin-bottom:8px; }
+        input, textarea { width:100%; background:#111; color:#e0e0e0; border:1px solid #444; border-radius:10px; padding:13px 15px; font:inherit; outline:none; transition:.3s; }
+        input:focus, textarea:focus { border-color:#00BFFF; box-shadow:0 0 0 3px rgba(0,191,255,.12); }
+        textarea { min-height:140px; resize:vertical; }
+        .field { margin-bottom:18px; }
+        .submit-button { width:100%; padding:14px; border:2px solid #00BFFF; border-radius:10px; background:#00BFFF; color:#000; font-weight:700; cursor:pointer; transition:.3s; }
+        .submit-button:hover { transform:translateY(-2px); box-shadow:0 8px 20px rgba(0,191,255,.35); }
+        .comment-card { padding:18px 0; border-bottom:1px solid #333; }
+        .comment-card:last-child { border-bottom:none; }
+        .comment-name { color:#00BFFF; font-weight:700; font-size:1.05em; }
+        .comment-time { color:#777; font-size:.8em; margin-left:8px; }
+        .comment-text { margin-top:7px; color:#d0d0d0; white-space:pre-wrap; overflow-wrap:anywhere; }
+
+
+        .reaction-buttons {
+            display: flex;
+            gap: 10px;
+            margin-top: 14px;
+        }
+
+        .reaction-button {
+            padding: 8px 14px;
+            border: 1px solid #444;
+            border-radius: 8px;
+            background: #111;
+            color: #e0e0e0;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .reaction-button:hover {
+            border-color: #00BFFF;
+            transform: translateY(-1px);
+        }
+
+        .reaction-button.liked {
+            background: #00BFFF;
+            color: #000;
+            border-color: #00BFFF;
+        }
+
+        .reaction-button.disliked {
+            background: #555;
+            color: #fff;
+            border-color: #777;
+        }
+
+        .delete-button {
+            margin-top: 12px;
+            padding: 8px 14px;
+            border: 1px solid #ff5555;
+            border-radius: 8px;
+            background: #ff3333;
+            color: #ffffff;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .delete-button:hover {
+            background: #cc0000;
+            transform: translateY(-1px);
+        }
+
+        .empty { color:#888; text-align:center; padding:15px 0; }
+        .footer { background:linear-gradient(135deg,#0f0f0f 0%,#1a1a1a 100%); color:#999; text-align:center; padding:20px; border-top:2px solid #00BFFF; border-radius:0 0 15px 15px; }
+        @media(max-width:768px){ .layout{grid-template-columns:1fr;gap:20px;padding:20px}.sidebar{position:static;padding:20px 15px}.header h1{font-size:1.8em} }
+        @media(max-width:480px){ body{padding:10px}.layout{padding:15px}.header{padding:20px}.header h1{font-size:1.5em} }
+    </style>
+</head>
+<body>
+<div class="container">
+    <header class="header"><h1>Biodata Luthfi Halimawan</h1></header>
+    <div class="layout">
+        <aside class="sidebar">
+            <h3>Menu</h3>
+            <a class="menu-button" href="!DOCKTYPE%20.html">Beranda</a>
+            <a class="menu-button" href="tentang-saya.html">Tentang Saya</a>
+            <a class="menu-button" href="data-diri.html">Data Diri</a>
+            <a class="menu-button" href="media-sosial.html">Media Sosial</a>
+            <a class="menu-button active" href="comments.html">Comments</a>
+            <h3>Foto</h3>
+            <img src="images (1).jpg" alt="Luthfi Halimawan" width="300">
+        </aside>
+        <main class="content">
+            <h2>Comments</h2>
+            <section class="comment-form">
+                <form id="commentForm">
+                    <div class="field"><label for="name">Nama</label><input id="name" name="name" type="text" placeholder="Masukkan nama kamu" maxlength="50" required></div>
+                    <div class="field"><label for="comment">Comment</label><textarea id="comment" name="comment" placeholder="Tulis comment kamu di sini..." maxlength="500" required></textarea></div>
+                    <button class="submit-button" type="submit">Kirim Comment</button>
+                </form>
+            </section>
+
+            <section class="comments-list">
+                <div id="commentsContainer"></div>
+            </section>
+        </main>
+    </div>
+
+    <footer class="footer">
+        <p>&copy; 2026 Luthfi Halimawan</p>
+    </footer>
+</div>
+
+<script>
+const form = document.getElementById('commentForm');
+const container = document.getElementById('commentsContainer');
+const STORAGE_KEY = 'luthfi_halimawan_comments';
+const USER_KEY = 'luthfi_comment_user_id';
+
+let userId = localStorage.getItem(USER_KEY);
+if (!userId) {
+    userId = 'user_' + Date.now() + '_' + Math.random().toString(36).substring(2, 10);
+    localStorage.setItem(USER_KEY, userId);
+}
+
+function getComments() {
+    try {
+        const stored = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+
+        // Komentar lama yang dibuat sebelum fitur kepemilikan ditambahkan
+        // diberi ownerId agar tetap bisa dihapus oleh pemilik browser ini.
+        let changed = false;
+        const comments = stored.map(function(c) {
+            if (!c.ownerId) {
+                c.ownerId = userId;
+                changed = true;
+            }
+            if (!c.id) {
+                c.id = 'comment_' + Date.now() + '_' + Math.random().toString(36).substring(2, 8);
+                changed = true;
+            }
+            if (typeof c.likes !== 'number') {
+                c.likes = 0;
+                changed = true;
+            }
+            if (typeof c.dislikes !== 'number') {
+                c.dislikes = 0;
+                changed = true;
+            }
+            if (!c.reactions || typeof c.reactions !== 'object') {
+                c.reactions = {};
+                changed = true;
+            }
+            return c;
+        });
+
+        if (changed) {
+            saveComments(comments);
+        }
+
+        return comments;
+    } catch (error) {
+        return [];
+    }
+}
+
+function saveComments(comments) {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(comments));
+}
+
+function renderComments() {
+    const comments = getComments();
+    container.innerHTML = '';
+
+    if (!comments.length) {
+        container.innerHTML = '<p class="empty">Belum ada comment. Jadilah yang pertama!</p>';
+        return;
+    }
+
+    comments.forEach(function(c) {
+        const card = document.createElement('article');
+        card.className = 'comment-card';
+
+        const top = document.createElement('div');
+        const name = document.createElement('span');
+        name.className = 'comment-name';
+        name.textContent = c.name;
+
+        const time = document.createElement('span');
+        time.className = 'comment-time';
+        time.textContent = c.time || '';
+
+        top.appendChild(name);
+        top.appendChild(time);
+
+        const text = document.createElement('p');
+        text.className = 'comment-text';
+        text.textContent = c.comment;
+
+        card.appendChild(top);
+        card.appendChild(text);
+
+        // Tombol Like dan Dislike untuk setiap comment
+        const reactions = document.createElement('div');
+        reactions.className = 'reaction-buttons';
+
+        const likeButton = document.createElement('button');
+        likeButton.className = 'reaction-button';
+        likeButton.type = 'button';
+        likeButton.textContent = '👍 Like ' + (c.likes || 0);
+
+        const dislikeButton = document.createElement('button');
+        dislikeButton.className = 'reaction-button';
+        dislikeButton.type = 'button';
+        dislikeButton.textContent = '👎 Dislike ' + (c.dislikes || 0);
+
+        const myReaction = (c.reactions && c.reactions[userId]) || null;
+        if (myReaction === 'like') likeButton.classList.add('liked');
+        if (myReaction === 'dislike') dislikeButton.classList.add('disliked');
+
+        likeButton.addEventListener('click', function() {
+            reactToComment(c.id, 'like');
+        });
+
+        dislikeButton.addEventListener('click', function() {
+            reactToComment(c.id, 'dislike');
+        });
+
+        reactions.appendChild(likeButton);
+        reactions.appendChild(dislikeButton);
+        card.appendChild(reactions);
+
+        if (c.ownerId === userId) {
+            const deleteButton = document.createElement('button');
+            deleteButton.className = 'delete-button';
+            deleteButton.type = 'button';
+            deleteButton.textContent = 'Hapus Comment';
+            deleteButton.addEventListener('click', function() {
+                deleteComment(c.id);
+            });
+            card.appendChild(deleteButton);
+        }
+
+        container.appendChild(card);
+    });
+}
+
+form.addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    const name = document.getElementById('name').value.trim();
+    const comment = document.getElementById('comment').value.trim();
+
+    if (!name || !comment) return;
+
+    const comments = getComments();
+    comments.unshift({
+        id: 'comment_' + Date.now() + '_' + Math.random().toString(36).substring(2, 8),
+        ownerId: userId,
+        name: name,
+        comment: comment,
+        time: new Date().toLocaleString('id-ID'),
+        likes: 0,
+        dislikes: 0,
+        reactions: {}
+    });
+
+    saveComments(comments);
+    form.reset();
+    renderComments();
+});
+
+function reactToComment(commentId, reaction) {
+    const comments = getComments();
+    const comment = comments.find(function(c) { return c.id === commentId; });
+
+    if (!comment) return;
+
+    if (!comment.reactions || typeof comment.reactions !== 'object') {
+        comment.reactions = {};
+    }
+
+    const previousReaction = comment.reactions[userId] || null;
+
+    // Klik tombol yang sama lagi = batalkan vote
+    if (previousReaction === reaction) {
+        if (reaction === 'like' && comment.likes > 0) comment.likes--;
+        if (reaction === 'dislike' && comment.dislikes > 0) comment.dislikes--;
+        delete comment.reactions[userId];
+    } else {
+        // Jika sebelumnya memilih yang lain, kurangi vote lama terlebih dahulu
+        if (previousReaction === 'like' && comment.likes > 0) comment.likes--;
+        if (previousReaction === 'dislike' && comment.dislikes > 0) comment.dislikes--;
+
+        if (reaction === 'like') comment.likes++;
+        if (reaction === 'dislike') comment.dislikes++;
+        comment.reactions[userId] = reaction;
+    }
+
+    saveComments(comments);
+    renderComments();
+}
+
+function deleteComment(commentId) {
+    const comments = getComments();
+    const comment = comments.find(function(c) { return c.id === commentId; });
+
+    if (!comment || comment.ownerId !== userId) {
+        alert('Kamu hanya bisa menghapus comment milikmu sendiri.');
+        return;
+    }
+
+    if (!confirm('Yakin ingin menghapus comment ini?')) return;
+
+    saveComments(comments.filter(function(c) { return c.id !== commentId; }));
+    renderComments();
+}
+
+renderComments();
+</script>
+</body>
+</html>

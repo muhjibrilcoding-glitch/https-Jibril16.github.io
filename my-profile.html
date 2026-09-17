@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Profile</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 100%);
+            color: #e0e0e0;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* SIDEBAR */
+        .sidebar {
+            background: linear-gradient(180deg, #2a2a2a 0%, #1a1a1a 100%);
+            padding: 25px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            box-shadow: 0 10px 30px rgba(0, 191, 255, 0.15);
+        }
+
+        .sidebar h2 {
+            color: #00BFFF;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .menu-button {
+            display: block;
+            text-decoration: none;
+            color: #e0e0e0;
+            background: #222222;
+            border: 1px solid rgba(0, 191, 255, 0.25);
+            padding: 12px 15px;
+            margin-bottom: 10px;
+            border-radius: 8px;
+            transition: 0.3s;
+            text-align: center;
+        }
+
+        .menu-button:hover,
+        .menu-button.active {
+            background: #00BFFF;
+            color: #000000;
+            border-color: #00BFFF;
+            box-shadow: 0 0 15px rgba(0, 191, 255, 0.4);
+        }
+
+        /* CONTENT */
+        .content {
+            background: #1a1a1a;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 191, 255, 0.12);
+        }
+
+        .content > h1 {
+            color: #00BFFF;
+            text-align: center;
+            margin-bottom: 25px;
+            font-size: 32px;
+        }
+
+        /* PROFILE CARD */
+        .profile-card {
+            background: #222222;
+            border: 1px solid rgba(0, 191, 255, 0.25);
+            border-radius: 15px;
+            overflow: hidden;
+        }
+
+        .profile-header {
+            background: linear-gradient(135deg, #00BFFF 0%, #00BFFF 100%);
+            color: #000000;
+            text-align: center;
+            padding: 35px 20px;
+        }
+
+        .profile-icon {
+            width: 100px;
+            height: 100px;
+            margin: 0 auto 15px;
+            border-radius: 50%;
+            background: #000000;
+            color: #00BFFF;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 48px;
+            font-weight: bold;
+            border: 4px solid #000000;
+        }
+
+        .profile-header h2 {
+            font-size: 27px;
+            margin-bottom: 5px;
+        }
+
+        .profile-header p {
+            font-size: 16px;
+            font-weight: 500;
+        }
+
+        /* BIODATA */
+        .biodata {
+            padding: 25px;
+        }
+
+        .biodata-row {
+            display: flex;
+            border-bottom: 1px solid rgba(0, 191, 255, 0.15);
+            padding: 13px 5px;
+        }
+
+        .biodata-row:last-child {
+            border-bottom: none;
+        }
+
+        .label {
+            width: 35%;
+            color: #00BFFF;
+            font-weight: bold;
+        }
+
+        .value {
+            width: 65%;
+            color: #e0e0e0;
+        }
+
+        /* ABOUT */
+        .about {
+            margin: 10px 25px 25px;
+            padding: 25px;
+            background: #1a1a1a;
+            border-left: 4px solid #00BFFF;
+            border-radius: 10px;
+        }
+
+        .about h2 {
+            color: #00BFFF;
+            margin-bottom: 15px;
+        }
+
+        .about p {
+            margin-bottom: 12px;
+            color: #d0d0d0;
+        }
+
+        /* MOTTO */
+        .motto {
+            margin: 25px;
+            padding: 25px;
+            text-align: center;
+            background: rgba(0, 191, 255, 0.08);
+            border: 1px solid rgba(0, 191, 255, 0.3);
+            border-radius: 10px;
+        }
+
+        .motto-title {
+            color: #00BFFF;
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .motto-text {
+            font-size: 18px;
+            font-style: italic;
+            color: #e0e0e0;
+        }
+
+        /* CONTACT */
+        .contact {
+            margin: 25px;
+            padding: 25px;
+            background: #1a1a1a;
+            border-radius: 10px;
+        }
+
+        .contact h2 {
+            color: #00BFFF;
+            margin-bottom: 15px;
+        }
+
+        .contact p {
+            margin-bottom: 8px;
+        }
+
+        .contact strong {
+            color: #00BFFF;
+        }
+
+        /* RESPONSIVE */
+        @media (min-width: 768px) {
+            .container {
+                display: grid;
+                grid-template-columns: 260px 1fr;
+                gap: 20px;
+                align-items: start;
+            }
+
+            .sidebar {
+                margin-bottom: 0;
+                position: sticky;
+                top: 20px;
+            }
+
+            .content {
+                min-width: 0;
+            }
+        }
+
+        @media (max-width: 767px) {
+            .container {
+                padding: 12px;
+            }
+
+            .content {
+                padding: 20px 15px;
+            }
+
+            .content > h1 {
+                font-size: 27px;
+            }
+
+            .biodata {
+                padding: 15px;
+            }
+
+            .biodata-row {
+                display: block;
+            }
+
+            .label,
+            .value {
+                width: 100%;
+            }
+
+            .label {
+                margin-bottom: 4px;
+            }
+
+            .about,
+            .motto,
+            .contact {
+                margin-left: 15px;
+                margin-right: 15px;
+            }
+
+            .profile-header h2 {
+                font-size: 22px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+
+        <!-- MENU -->
+        <div class="sidebar">
+            <h2>MENU</h2>
+
+            <a class="menu-button" href="!DOCKTYPE .html">
+                Beranda
+            </a>
+
+            <a class="menu-button" href="tentang-saya.html">
+                Tentang Saya
+            </a>
+
+            <a class="menu-button" href="data-diri.html">
+                Data Diri
+            </a>
+
+            <a class="menu-button" href="media-sosial.html">
+                Media Sosial
+            </a>
+
+            <a class="menu-button" href="comments.html">
+                Comments
+            </a>
+
+            <a class="menu-button active" href="my-profile.html">
+                My Profile
+            </a>
+        </div>
+
+        <!-- CONTENT -->
+        <div class="content">
+
+            <h1>My Profile</h1>
+
+            <div class="profile-card">
+
+                <!-- PROFILE HEADER -->
+                <div class="profile-header">
+
+                    <div class="profile-icon">
+                        J
+                    </div>
+
+                    <h2>
+                        Muhammad Jibril Suharman
+                    </h2>
+
+                    <p>
+                        Jibril / Jibe • Pelajar
+                    </p>
+
+                </div>
+
+                <!-- BIODATA -->
+                <div class="biodata">
+
+                    <div class="biodata-row">
+                        <div class="label">Nama Lengkap</div>
+                        <div class="value">
+                            Muhammad Jibril Suharman
+                        </div>
+                    </div>
+
+                    <div class="biodata-row">
+                        <div class="label">Nama Panggilan</div>
+                        <div class="value">
+                            Jibril / Jibe
+                        </div>
+                    </div>
+
+                    <div class="biodata-row">
+                        <div class="label">Tempat, Tanggal Lahir</div>
+                        <div class="value">
+                            Makassar, 16-07-2011
+                        </div>
+                    </div>
+
+                    <div class="biodata-row">
+                        <div class="label">Jenis Kelamin</div>
+                        <div class="value">
+                            Laki-laki
+                        </div>
+                    </div>
+
+                    <div class="biodata-row">
+                        <div class="label">Agama</div>
+                        <div class="value">
+                            Islam
+                        </div>
+                    </div>
+
+                    <div class="biodata-row">
+                        <div class="label">Status</div>
+                        <div class="value">
+                            Pelajar
+                        </div>
+                    </div>
+
+                    <div class="biodata-row">
+                        <div class="label">Sekolah</div>
+                        <div class="value">
+                            SMAN 9 Makassar (SMANSEL)
+                        </div>
+                    </div>
+
+                    <div class="biodata-row">
+                        <div class="label">Hobi</div>
+                        <div class="value">
+                            Main game dan dengar musik
+                        </div>
+                    </div>
+
+                    <div class="biodata-row">
+                        <div class="label">Cita-cita</div>
+                        <div class="value">
+                            Wirausaha
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- TENTANG SAYA -->
+                <div class="about">
+
+                    <h2>Tentang Saya</h2>
+
+                    <p>
+                        Halo! Aku adalah seorang siswa kelas XI berusia 15 tahun
+                        yang saat ini bersekolah di SMANSEL. Aku memiliki
+                        ketertarikan yang besar pada dunia teknologi, mulai dari
+                        membuat proyek pemrograman web menggunakan HTML, CSS,
+                        dan JavaScript hingga bereksperimen dengan Python serta
+                        Flowgorithm.
+                    </p>
+
+                    <p>
+                        Di waktu luang, aku gemar bermain game seperti
+                        Mobile Legends dan Valorant, serta menikmati serial
+                        anime populer seperti Dr. Stone dan Bleach.
+                    </p>
+
+                </div>
+
+                <!-- MOTTO -->
+                <div class="motto">
+
+                    <div class="motto-title">
+                        Motto Hidup
+                    </div>
+
+                    <div class="motto-text">
+                        "Embrace the glorious mess that you are."
+                    </div>
+
+                </div>
+
+                <!-- KONTAK -->
+                <div class="contact">
+
+                    <h2>Kontak</h2>
+
+                    <p>
+                        <strong>Nomor HP:</strong>
+                        082292341651
+                    </p>
+
+                    <p>
+                        <strong>Instagram:</strong>
+                        @jib_rea1
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</body>
+</html>

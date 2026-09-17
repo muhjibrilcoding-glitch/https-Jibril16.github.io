@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Biodata - Luthfi Halimawan</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 100%);
+            color: #e0e0e0;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* HEADER */
+        header {
+            background: linear-gradient(135deg, #00BFFF 0%, #00BFFF 100%);
+            color: #000000;
+            padding: 30px;
+            border-radius: 15px 15px 0 0;
+            box-shadow: 0 10px 30px rgba(0, 191, 255, 0.3);
+            text-align: center;
+            margin-bottom: 0;
+        }
+
+        header h1 {
+            font-size: 2.5em;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        /* MAIN LAYOUT */
+        .main-wrapper {
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            gap: 30px;
+            background: #1a1a1a;
+            padding: 30px;
+            border-radius: 0 0 15px 15px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
+        }
+
+        /* SIDEBAR */
+        aside {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+            background: linear-gradient(180deg, #2a2a2a 0%, #1a1a1a 100%);
+            padding: 30px 20px;
+            border-radius: 15px;
+            border-left: 5px solid #00BFFF;
+            box-shadow: 0 10px 30px rgba(0, 191, 255, 0.15),
+                        inset 0 1px 0 rgba(0, 191, 255, 0.1);
+            height: fit-content;
+            position: sticky;
+            top: 20px;
+        }
+
+        .logo-section {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .logo-section img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 12px;
+            box-shadow: 0 8px 20px rgba(0, 191, 255, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 3px solid #00BFFF;
+        }
+
+        .logo-section img:hover {
+            transform: scale(1.05);
+            box-shadow: 0 12px 30px rgba(0, 191, 255, 0.4);
+        }
+
+        .menu-section {
+            background: rgba(0, 191, 255, 0.05);
+            padding: 20px;
+            border-radius: 12px;
+            border: 1px solid rgba(0, 191, 255, 0.2);
+        }
+
+        .menu-section h3 {
+            color: #00BFFF;
+            font-size: 1.2em;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-align: center;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #00BFFF;
+            font-weight: 700;
+        }
+
+        .menu-button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 14px 15px;
+            background: linear-gradient(135deg, #00BFFF 0%, #00BFFF 100%);
+            color: #000000;
+            text-decoration: none;
+            border-radius: 10px;
+            font-weight: 600;
+            margin-bottom: 12px;
+            transition: all 0.3s ease;
+            text-align: center;
+            border: 2px solid #00BFFF;
+            box-shadow: 0 4px 12px rgba(0, 191, 255, 0.2);
+            font-size: 0.95em;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .menu-button::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: width 0.5s, height 0.5s;
+        }
+
+        .menu-button:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        .menu-button:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 25px rgba(0, 191, 255, 0.4);
+            background: linear-gradient(135deg, #00BFFF 0%, #00BFFF 100%);
+        }
+
+        .menu-button:active {
+            transform: translateY(-2px);
+        }
+
+        .photo-section {
+            text-align: center;
+            background: rgba(0, 191, 255, 0.05);
+            padding: 20px;
+            border-radius: 12px;
+            border: 1px solid rgba(0, 191, 255, 0.2);
+        }
+
+        .photo-section h3 {
+            color: #00BFFF;
+            margin-bottom: 15px;
+            font-size: 1.1em;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .photo-section img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 12px;
+            border: 3px solid #00BFFF;
+            box-shadow: 0 10px 25px rgba(0, 191, 255, 0.25);
+            transition: transform 0.3s ease;
+        }
+
+        .photo-section img:hover {
+            transform: scale(1.02) rotate(-1deg);
+        }
+
+        /* CONTENT */
+        main {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        main h2 {
+            color: #00BFFF;
+            font-size: 1.8em;
+            margin-top: 20px;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #00BFFF;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        main h2:first-child {
+            margin-top: 0;
+        }
+
+        main p {
+            font-size: 1em;
+            line-height: 1.8;
+            color: #d0d0d0;
+            text-align: justify;
+        }
+
+        main ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        main li {
+            padding: 10px 0;
+            border-bottom: 1px solid #333;
+            color: #d0d0d0;
+        }
+
+        main li:last-child {
+            border-bottom: none;
+        }
+
+        main li b {
+            color: #00BFFF;
+            font-weight: 600;
+        }
+
+        main a {
+            color: #00BFFF;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        main a:hover {
+            color: #00BFFF;
+            text-decoration: underline;
+        }
+
+        main a::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #00BFFF;
+            transition: width 0.3s ease;
+        }
+
+        main a:hover::after {
+            width: 100%;
+        }
+
+        hr {
+            border: none;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #00BFFF, transparent);
+            margin: 25px 0;
+        }
+
+        /* FOOTER */
+        footer {
+            background: linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 100%);
+            color: #999;
+            text-align: center;
+            padding: 20px;
+            border-top: 2px solid #00BFFF;
+            font-size: 0.95em;
+            margin-top: 30px;
+        }
+
+        footer small {
+            display: block;
+            padding: 10px 0;
+        }
+
+        footer a {
+            color: #00BFFF;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        footer a:hover {
+            color: #00BFFF;
+            text-decoration: underline;
+        }
+
+        /* PAGE TRANSITION ANIMATIONS */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes scaleIn {
+            from {
+                opacity: 0;
+                transform: scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        @keyframes fadeOut {
+            from {
+                opacity: 1;
+            }
+            to {
+                opacity: 0;
+            }
+        }
+
+        @keyframes slideOutDown {
+            from {
+                opacity: 1;
+                transform: translateY(0);
+            }
+            to {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+        }
+
+        /* TRANSITION OVERLAY */
+        .page-transition {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #00BFFF 0%, #00BFFF 100%);
+            z-index: 9999;
+            pointer-events: none;
+            animation: transitionOut 0.5s ease-in-out forwards;
+        }
+
+        @keyframes transitionOut {
+            0% {
+                opacity: 1;
+                transform: scaleY(1);
+            }
+            50% {
+                opacity: 0.8;
+            }
+            100% {
+                opacity: 0;
+                transform: scaleY(0);
+            }
+        }
+
+        .page-transitioning .page-transition {
+            animation: transitionIn 0.5s ease-in-out forwards;
+        }
+
+        @keyframes transitionIn {
+            0% {
+                opacity: 0;
+                transform: scaleY(0);
+            }
+            50% {
+                opacity: 0.8;
+            }
+            100% {
+                opacity: 1;
+                transform: scaleY(1);
+            }
+        }
+
+        /* APPLY ANIMATIONS TO ELEMENTS */
+        .container {
+            animation: fadeIn 0.6s ease-in-out;
+        }
+
+        header {
+            animation: slideInDown 0.7s ease-out;
+        }
+
+        @keyframes slideInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        aside {
+            animation: slideInLeft 0.8s ease-out 0.1s both;
+        }
+
+        main {
+            animation: slideInRight 0.8s ease-out 0.1s both;
+        }
+
+        .menu-button {
+            animation: slideInUp 0.5s ease-out backwards;
+        }
+
+        .menu-button:nth-child(1) { animation-delay: 0.2s; }
+        .menu-button:nth-child(2) { animation-delay: 0.3s; }
+        .menu-button:nth-child(3) { animation-delay: 0.4s; }
+
+        main h2 {
+            animation: scaleIn 0.6s ease-out;
+        }
+
+        main p {
+            animation: slideInUp 0.6s ease-out;
+        }
+
+        main p:nth-of-type(1) { animation-delay: 0.2s; }
+        main p:nth-of-type(2) { animation-delay: 0.3s; }
+        main p:nth-of-type(3) { animation-delay: 0.4s; }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 1.8em;
+            }
+
+            .main-wrapper {
+                grid-template-columns: 1fr;
+                gap: 20px;
+                padding: 20px;
+            }
+
+            aside {
+                position: static;
+                padding: 20px 15px;
+            }
+
+            .menu-button {
+                padding: 12px 15px;
+                font-size: 0.9em;
+            }
+
+            main h2 {
+                font-size: 1.4em;
+            }
+
+            body {
+                padding: 10px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            header {
+                padding: 20px;
+            }
+
+            header h1 {
+                font-size: 1.5em;
+            }
+
+            .main-wrapper {
+                padding: 15px;
+            }
+
+            aside {
+                gap: 20px;
+            }
+
+            .menu-button {
+                padding: 10px 12px;
+                font-size: 0.85em;
+            }
+
+            .menu-section h3,
+            .photo-section h3 {
+                font-size: 1em;
+            }
+
+            main p {
+                text-align: left;
+                font-size: 0.95em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Biodata Luthfi Halimawan</h1>
+        </header>
+
+        <div class="main-wrapper">
+            <!-- SIDEBAR -->
+            <aside>
+                <div class="logo-section">
+                    <img src="images (2).jpg" alt="Logo Luthfi Halimawan" width="200">
+                </div>
+
+                <div class="menu-section">
+                    <h3>Menu</h3>
+                    <a class="menu-button" href="tentang-saya.html">Tentang Saya</a>
+                    <a class="menu-button" href="data-diri.html">Data Diri</a>
+                    <a class="menu-button" href="media-sosial.html">Media Sosial</a>
+                    <a class="menu-button" href="comments.html">Comments</a>
+                    <a class="menu-button" href="my-profile.html">My Profile</a>
+                </div>
+
+                <div class="photo-section">
+                    <h3 style="color: #00BFFF; margin-bottom: 15px;">Foto</h3>
+                    <img src="images (1).jpg" alt="Luthfi Halimawan" width="250">
+                </div>
+            </aside>
+
+            <!-- CONTENT -->
+            <main>
+                <h2 id="tentang">Tentang Saya</h2>
+                <p>
+                    Luthfi Halimawan (lahir di Bandung, 21 Januari 1994) adalah seorang konten kreator, YouTuber, streamer, dan pengusaha berkebangsaan Indonesia. Ia mulai membangun kariernya di platform digital melalui ketertarikannya yang besar pada dunia permainan video dan dunia hiburan internet.
+                </p>
+                <p>
+                    Namanya mulai dikenal luas oleh publik melalui saluran YouTube-nya yang menyajikan berbagai macam konten menarik, mulai dari pembawaan permainan video yang interaktif, reaksi terhadap klip viral, hingga interaksi santai bersama para pengikutnya saat melakukan siaran langsung (live streaming). Karakter gaya komunikasinya yang humoris, spontan, dan apa adanya menjadi ciri khas yang disukai oleh audiensnya.
+                </p>
+                <p>
+                    Selain aktif sebagai pembuat konten di media sosial, Luthfi juga mengepakkan sayapnya ke dunia bisnis dan kewirausahaan. Ia mengembangkan beberapa unit usaha di bidang pakaian (apparel/streetwear) serta bisnis kreatif lainnya, membuktikan eksistensinya tidak hanya sebagai entertainer digital tetapi juga sebagai pengusaha muda.
+                </p>
+
+                <hr>
+
+                <h2 id="data">Data Diri</h2>
+                <ul>
+                    <li><b>Nama Lengkap:</b> Luthfi Halimawan</li>
+                    <li><b>Nama Panggilan:</b> Luthfi / Upi</li>
+                    <li><b>Tempat, Tanggal Lahir:</b> Bandung, 21 Januari 1994</li>
+                    <li><b>Kewarganegaraan:</b> Indonesia</li>
+                    <li><b>Agama:</b> Islam</li>
+                    <li><b>Profesi Utama:</b> Content Creator, YouTuber, Streamer</li>
+                    <li><b>Bidang Usaha:</b> Fashion Apparel & Creative Entrepreneurship</li>
+                    <li><b>Fokus Konten:</b> Gaming, Live Streaming, Pop Culture, Reaction Videos, Vlog</li>
+                    <li><b>Domisili:</b> Bandung, Jawa Barat</li>
+                </ul>
+
+                <hr>
+
+                <h2 id="medsos">Media Sosial & Saluran Resmi</h2>
+                <ul>
+                    <li>
+                        <b>YouTube:</b> 
+                        <a href="https://www.youtube.com/@LuthfiHalimawan" target="_blank">Luthfi Halimawan</a>
+                    </li>
+                    <li>
+                        <b>Instagram:</b> 
+                        <a href="https://www.instagram.com/luthfihalimawan" target="_blank">@luthfihalimawan</a>
+                    </li>
+                </ul>
+            </main>
+        </div>
+
+        <footer>
+            <small>&copy; 2026 Muhammad Jibril Suharman 11.11 | Website Biodata Luthfi Halimawan. All rights reserved.</small>
+        </footer>
+    </div>
+
+    <script>
+        // Direct navigation without transition animation
+        document.addEventListener('DOMContentLoaded', function() {
+            const menuButtons = document.querySelectorAll('.menu-button');
+            
+            menuButtons.forEach(button => {
+                button.addEventListener('click', function(e) {
+                    const href = this.getAttribute('href');
+                    
+                    if (href && !href.startsWith('http') && !href.startsWith('#')) {
+                        e.preventDefault();
+                        window.location.href = href;
+                    }
+                });
+            });
+        });
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Add animation to elements on page load
+        window.addEventListener('load', function() {
+            const elements = document.querySelectorAll('main h2, main p, main ul, main li');
+            elements.forEach((element, index) => {
+                element.style.animation = 'slideInUp 0.6s ease-out ' + (0.1 * index) + 's both';
+            });
+        });
+    </script>
+</body>
+</html>
